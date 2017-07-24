@@ -23,6 +23,16 @@ public class SamsungTv implements Tv {
         this.price = price;
     }
 
+    public void setSpeaker(Speaker speaker) {
+        System.out.println("===> setSpeaker() 호출");
+        this.speaker = speaker;
+    }
+
+    public void setPrice(int price) {
+        System.out.println("===> setPrice() 호출");
+        this.price = price;
+    }
+
     @Override
     public void powerOn() {
         System.out.println("Samsung Tv -- 전원켜기");
