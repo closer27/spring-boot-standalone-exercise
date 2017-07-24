@@ -5,14 +5,22 @@ package io.icednut.spring.exercise.model;
  * @created 2017. 7. 21.
  */
 public class SamsungTv implements Tv {
-    private SonySpeaker speaker;
+    private Speaker speaker;
+    private int price;
 
     public SamsungTv() {
-        System.out.println("===> Samsung Tv 객체 생성");
+        System.out.println("===> Samsung Tv 객체 생성(1)");
     }
 
-    public SamsungTv(SonySpeaker speaker) {
+    public SamsungTv(Speaker speaker) {
+        System.out.println("===> Samsung Tv 객체 생성(2)");
         this.speaker = speaker;
+    }
+
+    public SamsungTv(Speaker speaker, int price) {
+        System.out.println("===> Samsung Tv 객체 생성(3)");
+        this.speaker = speaker;
+        this.price = price;
     }
 
     @Override

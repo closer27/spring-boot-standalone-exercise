@@ -15,5 +15,6 @@ public class MainApplication {
 
         Tv samsungTv = (Tv) applicationContext.getBean("samsungTv");
         samsungTv.powerOn();
+        samsungTv.volumeUp();
     }
 }
