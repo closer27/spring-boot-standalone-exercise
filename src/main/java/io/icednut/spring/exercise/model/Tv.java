@@ -1,9 +1,8 @@
 package io.icednut.spring.exercise.model;
 
-/**
- * @author wangeun.lee@sk.com
- * @created 2017. 7. 21.
- */
+import org.springframework.stereotype.Component;
+
+@Component
 public interface Tv {
     void powerOn();
     void powerOff();

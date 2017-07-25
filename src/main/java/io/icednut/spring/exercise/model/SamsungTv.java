@@ -1,10 +1,14 @@
 package io.icednut.spring.exercise.model;
 
-/**
- * @author wangeun.lee@sk.com
- * @created 2017. 7. 21.
- */
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+@Component("samsungTv")
 public class SamsungTv implements Tv {
+
+    @Autowired
+    @Qualifier("appleSpeaker")
     private Speaker speaker;
     private int price;
 
@@ -42,8 +46,8 @@ public class SamsungTv implements Tv {
     public void powerOff() { System.out.println("Samsung Tv -- 전원끄기"); }
 
     @Override
-    public void volumeUp() { speaker.volumeUp(); }
+    public void volumeUp() { this.speaker.volumeUp(); }
 
     @Override
-    public void volumeDown() { speaker.volumeDown(); }
+    public void volumeDown() { this.speaker.volumeDown(); }
 }

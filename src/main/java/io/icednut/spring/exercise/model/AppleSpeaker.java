@@ -1,5 +1,8 @@
 package io.icednut.spring.exercise.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class AppleSpeaker implements Speaker {
 
     public AppleSpeaker() {
