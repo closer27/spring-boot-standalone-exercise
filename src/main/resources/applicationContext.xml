@@ -11,14 +11,7 @@
                            http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
 
     <context:component-scan base-package="io.icednut.spring.exercise"/>
-
-    <bean id="log" class="io.icednut.spring.exercise.common.Log4jAdvice"/>
-    <aop:config>
-        <aop:pointcut id="allPointcut" expression="execution(* io.icednut.spring.exercise..*Impl.*(..))"/>
-        <aop:aspect ref="log">
-            <aop:before pointcut-ref="allPointcut" method="printLogging"/>
-        </aop:aspect>
-    </aop:config>
+    <aop:aspectj-autoproxy/>
     <!--
     <bean id="userService" class="io.icednut.spring.exercise.user.impl.UserServiceImpl">
         <property name="userDAO" ref="userDAO"/>
