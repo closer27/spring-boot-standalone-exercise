@@ -23,7 +23,8 @@ repositories {
 
 
 dependencies {
-    runtime "com.h2database:h2:1.4.190"
+    compile "com.h2database:h2:1.4.190"
+    compile "org.aspectj:aspectjweaver:1.8.8"
     compile('org.springframework.boot:spring-boot-starter')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
