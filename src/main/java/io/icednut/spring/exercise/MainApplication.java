@@ -18,6 +18,8 @@ public class MainApplication {
         ApplicationContext applicationContext = SpringApplication.run(MainApplication.class, args);
 
         BoardService boardService = (BoardService) applicationContext.getBean("boardService");
+        boardService.createBoard();
+
         BoardDTO dto = new BoardDTO();
         dto.setTitle("임시 제목");
         dto.setWriter("홍길동");

@@ -16,7 +16,22 @@ public class UserDAO {
     private ResultSet rs = null;
 
     // SQL 명령어들
+    private final String USER_CREATE = "CREATE TABLE USER(ID VARCHAR2(8) PRIMARY KEY, PASSWORD VARCHAR2(8), NAME VARCHAR2(20), ROLE VARCHAR2(5));";
     private final String USER_GET = "select * from users where id=? and password=?";
+
+    // 테이블 생성
+    public void createUser() {
+        System.out.println("===> JDBC로 createUser() 기능 처리");
+        try {
+            conn = JDBCUtil.getConnection();
+            stmt = conn.prepareStatement(USER_CREATE);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.close(stmt, conn);
+        }
+    }
 
     // 글 상세 조회
     public UserDTO getUser(UserDTO dto) {

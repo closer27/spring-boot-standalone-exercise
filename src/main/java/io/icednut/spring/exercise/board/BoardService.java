@@ -4,6 +4,9 @@ import java.util.List;
 
 public interface BoardService {
     // CRUD 기능 메소드 구현
+    // 테이블 생성
+    void createBoard();
+
     // 글 등록
     void insertBoard(BoardDTO dto);
 
