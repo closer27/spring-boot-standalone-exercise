@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:context="http://www.springframework.org/schema/aop"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/cache"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context-4.2.xsd
@@ -43,43 +41,13 @@
     <!-- annotation 방식 -->
     <!--<aop:aspectj-autoproxy/>-->
 
-
-    <!-- Transaction 설정 -->
-    <!--<bean id="txManager" class="org.springframework.orm.jap.JpaTransactionManager">-->
-    <!--<property name="entityManagerFactory" ref="entityManagerFactory"></property>-->
-    <!--</bean>-->
-    <!--<tx:advice id="txAdvice" transaction-manager="txManager">-->
-    <!--<tx:attributes>-->
-    <!--<tx:method name="get*" read-only="true"/>-->
-    <!--<tx:method name="*"/>-->
-    <!--</tx:attributes>-->
-    <!--</tx:advice>-->
-    <!--<aop:config>-->
-    <!--<aop:pointcut id="allPointcut" expression="execution(* io.icednut.spring.exercise..*Impl.*(..))"/>-->
-    <!--<aop:advisor pointcut-ref="allPointcut" advice-ref="txAdvice"/> -->
-    <!--</aop:config>-->
-
-
-    <!-- DataSource XML 설정 -->
-    <!--<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">-->
-    <!--<property name="driverClassName" value="org.h2.Driver"/>-->
-    <!--<property name="url" value="jdbc:h2:tcp://localhost/~/test"/>-->
-    <!--<property name="username" value="sa"/>-->
-    <!--<property name="password" value=""/>-->
-    <!--</bean>-->
-    <!--
-    <bean id="userService" class="io.icednut.spring.exercise.user.impl.UserServiceImpl">
-        <property name="userDAO" ref="userDAO"/>
+    <!-- DataSource 설정 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="org.h2.Driver" />
+        <property name="url" value="jdbc:h2:mem:testdb" />
+        <property name="username" value="sa" />
+        <property name="password" value="" />
     </bean>
 
-
-
     <bean id="userDAO" class="io.icednut.spring.exercise.user.impl.UserDAO"/>
-    -->
-    <!--
-    <bean id="samsungTv" class="io.icednut.spring.exercise.model.SamsungTv" p:speaker-ref="apple" p:price="270000"/>
-
-    <bean id="sony" class="io.icednut.spring.exercise.model.SonySpeaker"/>
-    <bean id="apple" class="io.icednut.spring.exercise.model.AppleSpeaker"/>
-    -->
 </beans>

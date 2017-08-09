@@ -1,5 +1,6 @@
 package io.icednut.spring.exercise.board.impl;
 
+import io.icednut.spring.exercise.board.BoardDAOSpring;
 import io.icednut.spring.exercise.board.BoardDTO;
 import io.icednut.spring.exercise.board.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import java.util.List;
 @Service("boardService")
 public class BoardServiceImpl implements BoardService {
     @Autowired
-    private BoardDAO boardDAO;
+    private BoardDAOSpring boardDAO;
 
     @Override
     public void createBoard() { boardDAO.createBoard(); }
