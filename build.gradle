@@ -23,9 +23,10 @@ repositories {
 
 
 dependencies {
-    compile "com.h2database:h2:1.4.190"
+    compile "com.h2database:h2:1.4.196"
     compile group: 'commons-dbcp', name: 'commons-dbcp', version: '1.4'
     compile group: 'org.springframework', name: 'spring-jdbc', version: '4.2.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-tx', version: '4.2.0.RELEASE'
     compile "org.aspectj:aspectjweaver:1.8.8"
     compile('org.springframework.boot:spring-boot-starter')
     testCompile('org.springframework.boot:spring-boot-starter-test')

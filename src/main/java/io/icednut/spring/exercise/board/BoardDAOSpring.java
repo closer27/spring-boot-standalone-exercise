@@ -14,6 +14,8 @@ public class BoardDAOSpring {
     private JdbcTemplate jdbcTemplate;
 
     private final String BOARD_CREATE = "CREATE TABLE BOARD(SEQ NUMBER(5) PRIMARY KEY, TITLE VARCHAR2(200), WRITER VARCHAR2(20), CONTENT VARCHAR2(2000), REGDATE DATE DEFAULT SYSDATE, CNT NUMBER(5) DEFAULT 0);";
+//    private final String BOARD_INSERT =
+//            "insert into BOARD(seq, title, writer, content) values((select nvl(max(seq), 0)+1 from board),?,?,?)";
     private final String BOARD_INSERT =
             "insert into BOARD(seq, title, writer, content) values((select nvl(max(seq), 0)+1 from board),?,?,?)";
     private final String BOARD_UPDATE = "update BOARD set title=?, content=? where seq=?";
@@ -22,7 +24,7 @@ public class BoardDAOSpring {
     private final String BOARD_LIST = "select * from BOARD order by seq desc";
 
     public void createBoard() {
-        System.out.println("===> Spring JDBC로 insertBoard() 기능 처리");
+        System.out.println("===> Spring JDBC로 createBoard() 기능 처리");
         jdbcTemplate.update(BOARD_CREATE);
     }
 
@@ -48,7 +50,7 @@ public class BoardDAOSpring {
     }
 
     public List<BoardDTO> getBoardList(BoardDTO dto) {
-        System.out.println("===> Spring JDBC로 updateBoard() 기능 처리");
+        System.out.println("===> Spring JDBC로 getBoardList() 기능 처리");
         return jdbcTemplate.query(BOARD_LIST, new BoardRowMapper());
     }
 }

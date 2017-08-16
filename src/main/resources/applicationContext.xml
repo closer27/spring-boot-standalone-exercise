@@ -2,52 +2,77 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context-4.2.xsd
                            http://www.springframework.org/schema/aop
-                           http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+                           http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+                           http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 
     <context:component-scan base-package="io.icednut.spring.exercise"/>
+    <!--<bean id="userDAO" class="io.icednut.spring.exercise.user.impl.UserDAO"/>-->
 
     <!-- xml 방식 -->
-    <bean id="after" class="io.icednut.spring.exercise.common.XmlAdvice"/>
-    <aop:config>
-        <aop:pointcut id="allPointcut" expression="execution(* io.icednut.spring.exercise..*Impl.*(..))"/>
-        <!--<aop:pointcut id="getPointcut" expression="execution(* io.icednut.spring.exercise..*Impl.get*(..))"/>-->
+    <!--<bean id="after" class="io.icednut.spring.exercise.common.XmlAdvice"/>-->
+    <!--<aop:config>-->
+        <!--<aop:pointcut id="allPointcut" expression="execution(* io.icednut.spring.exercise..*Impl.*(..))"/>-->
+        <!--&lt;!&ndash;<aop:pointcut id="getPointcut" expression="execution(* io.icednut.spring.exercise..*Impl.get*(..))"/>&ndash;&gt;-->
 
-        <aop:aspect ref="after">
-            <aop:before pointcut-ref="allPointcut" method="beforeLog"/>
-        </aop:aspect>
+        <!--<aop:aspect ref="after">-->
+            <!--<aop:before pointcut-ref="allPointcut" method="beforeLog"/>-->
+        <!--</aop:aspect>-->
 
         <!--<aop:aspect ref="after">-->
         <!--<aop:after-returning pointcut-ref="getPointcut" method="afterLog" returning="returnObj"/>-->
         <!--</aop:aspect>-->
 
-        <aop:aspect ref="after">
-            <aop:after-throwing pointcut-ref="allPointcut" method="exceptionLog" throwing="exceptObj"/>
-        </aop:aspect>
+        <!--<aop:aspect ref="after">-->
+            <!--<aop:after-throwing pointcut-ref="allPointcut" method="exceptionLog" throwing="exceptObj"/>-->
+        <!--</aop:aspect>-->
 
-        <aop:aspect ref="after">
-            <aop:after pointcut-ref="allPointcut" method="finallyLog"/>
-        </aop:aspect>
+        <!--<aop:aspect ref="after">-->
+            <!--<aop:after pointcut-ref="allPointcut" method="finallyLog"/>-->
+        <!--</aop:aspect>-->
 
-        <aop:aspect ref="after">
-            <aop:around pointcut-ref="allPointcut" method="aroundLog"/>
-        </aop:aspect>
-    </aop:config>
+        <!--<aop:aspect ref="after">-->
+            <!--<aop:around pointcut-ref="allPointcut" method="aroundLog"/>-->
+        <!--</aop:aspect>-->
+    <!--</aop:config>-->
 
     <!-- annotation 방식 -->
     <!--<aop:aspectj-autoproxy/>-->
 
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
     <!-- DataSource 설정 -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="org.h2.Driver" />
-        <property name="url" value="jdbc:h2:mem:testdb" />
+        <property name="url" value="jdbc:h2:tcp://localhost/~/testdb" />
         <property name="username" value="sa" />
         <property name="password" value="" />
+    </bean>-=[;
+
+    <!-- Transaction 설정 -->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
     </bean>
 
-    <bean id="userDAO" class="io.icednut.spring.exercise.user.impl.UserDAO"/>
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <tx:method name="get*" read-only="true"/>
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id="txPointcut" expression="execution(* io.icednut.spring.exercise..*(..)))"/>
+        <aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice"/>
+    </aop:config>
+
 </beans>
